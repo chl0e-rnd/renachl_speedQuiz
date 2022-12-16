@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">speedQuiz</string>
+    <string name="main_titre">Speed Quiz</string>
 </resources>

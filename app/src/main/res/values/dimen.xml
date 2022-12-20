@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="main_margin_txt">50dp</dimen>
+    <dimen name="main_margin_horizontal_txt">50dp</dimen>
+    <dimen name="main_margin_top_txt">30dp</dimen>
 </resources>

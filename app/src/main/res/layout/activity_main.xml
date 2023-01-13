@@ -23,7 +23,7 @@
         android:id="@+id/main_saisie_nom_j1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/main_txt_j1"
+        android:hint="@string/nom_txt_j1"
         android:layout_marginTop="@dimen/main_margin_top_txt"
         android:layout_marginHorizontal="@dimen/main_margin_horizontal_txt"
         app:layout_constraintTop_toBottomOf="@id/main_txt_titre" >
@@ -40,7 +40,7 @@
         android:id="@+id/main_saisie_nom_j2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/main_txt_j2"
+        android:hint="@string/nom_txt_j2"
         android:layout_marginTop="@dimen/main_margin_top_txt"
         android:layout_marginHorizontal="@dimen/main_margin_horizontal_txt"
         app:layout_constraintTop_toBottomOf="@id/main_saisie_nom_j1">

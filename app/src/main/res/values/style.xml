@@ -17,7 +17,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">@dimen/quiz_font_qst</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginEnd">@dimen/app_margin</item>
-        <item name="android:layout_marginStart">@dimen/app_margin</item>
+        <item name="android:layout_marginTop">@dimen/quiz_space_bt</item>
     </style>
+
+    <style name="quiz.bt.jeu" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_width">@dimen/quiz_bt_jeu</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

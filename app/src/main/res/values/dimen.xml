@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="main_margin_horizontal_txt">50dp</dimen>
-    <dimen name="main_margin_top_txt">30dp</dimen>
-    <dimen name="quiz"></dimen>
+    <dimen name="app_margin">18dp</dimen>
+
+    <dimen name="start_margin_horizontal_txt">50dp</dimen>
+    <dimen name="start_margin_top_txt">30dp</dimen>
+    <dimen name="start_bt_sep">10dp</dimen>
+
+    <dimen name="quiz_bt_jeu">500dp</dimen>
+    <dimen name="quiz_height_qst">50dp</dimen>
+    <dimen name="quiz_font_qst">30sp</dimen>
+    <dimen name="quiz_font_size_score">70sp</dimen>
+    <dimen name="quiz_space_bt">5dp</dimen>
+
 </resources>

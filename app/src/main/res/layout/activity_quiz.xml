@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".QuizActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/quiz_layout_j1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/quiz.txt.nomJoueur"
+            android:id="@+id/quiz_txt_nom_j1"
+            android:rotation="180"
+            android:text="@string/quiz_nom_j1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/quiz_txt_qst_j1" />
+
+        <Button
+            android:id="@+id/quiz_bt_j1"
+            style="@style/quiz.bt.jeu"
+            android:layout_marginBottom="@dimen/quiz_space_bt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/quiz_txt_qst_j1"
+            style="@style/quiz.txt.questions"
+            android:rotation="180"
+            android:text="@string/quiz_qst_j"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_bt_j1"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/quiz_layout_central_bt_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/quiz.txt.score"
+            android:id="@+id/quiz_score_j1"
+            android:text="@string/quiz_score_j1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/quiz_bt_rejouer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/start_bt_sep"
+                android:text="@string/quiz_bt_rej"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/quiz_bt_menu"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quiz_bt_menu"
+                app:layout_constraintStart_toEndOf="@+id/quiz_bt_rejouer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/quiz.txt.score"
+            android:id="@+id/quiz_score_j2"
+            android:text="@string/quiz_score_j2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/quiz_layout_j2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            style="@style/quiz.txt.nomJoueur"
+            android:id="@+id/quiz_txt_nom_j2"
+            android:text="@string/quiz_nom_j1"
+            app:layout_constraintBottom_toTopOf="@id/quiz_txt_qst_j2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/quiz_bt_j2"
+            style="@style/quiz.bt.jeu"
+            android:layout_marginTop="@dimen/quiz_space_bt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/quiz_txt_qst_j2" />
+
+        <TextView
+            style="@style/quiz.txt.questions"
+            android:id="@+id/quiz_txt_qst_j2"
+            android:text="@string/quiz_qst_j"
+            app:layout_constraintBottom_toTopOf="@id/quiz_txt_qst_j2"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

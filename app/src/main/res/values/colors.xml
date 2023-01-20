@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blanc">@color/white</color>
-    <color name="purple_500">#FF105C0A</color>
-    <color name="purple_700">#FF6DB66F</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="vert_fonce">#0A3C06</color>
+    <color name="vert_moyen">#FF105C0A</color>
+    <color name="vert_clair">#54AA56</color>
+    <color name="turquoise_clair">#218E83</color>
+    <color name="turquoise_fonce">#114343</color>
+    <color name="noir">#FF000000</color>
+    <color name="blanc">#FFFFFFFF</color>
 </resources>

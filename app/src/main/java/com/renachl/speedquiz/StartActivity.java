@@ -45,6 +45,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ET_SaisiJ1.setText("");
                 ET_SaisiJ2.setText("");
+                ET_SaisiJ1.requestFocus();
             }
         });
 

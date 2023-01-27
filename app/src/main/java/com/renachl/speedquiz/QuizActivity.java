@@ -27,6 +27,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView TXT_ScoreJ2;
     private Button BT_J1;
     private Button BT_J2;
+    private Button BT_Rejouer;
     private ConstraintLayout CL_Bt;
 
     //Variable
@@ -60,6 +61,7 @@ public class QuizActivity extends AppCompatActivity {
         TXT_ScoreJ2 = findViewById(R.id.quiz_score_j2);
         BT_J1 = findViewById(R.id.quiz_bt_j1);
         BT_J2 = findViewById(R.id.quiz_bt_j2);
+        BT_Rejouer = findViewById(R.id.quiz_bt_rejouer);
         CL_Bt = findViewById(R.id.quiz_layout_bt);
 
         //Cache les boutons pendant la partie
@@ -111,6 +113,33 @@ public class QuizActivity extends AppCompatActivity {
                 TXT_ScoreJ2.setText(Integer.toString(scoreJoueur2));
             }
         });
+
+        BT_Rejouer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Rela
+                resetScreenData();
+                startCountDownTimer();
+            }
+        });
+    }
+
+    /**
+     * Reset touts les champs de l'écran ainsi que les valeurs
+     */
+    public void resetScreenData() {
+        //Reset les scores des joueurs
+        scoreJoueur1 = 0;
+        scoreJoueur2 = 0;
+        TXT_ScoreJ1.setText("0");
+        TXT_ScoreJ2.setText("0");
+
+        //Nouvel instance de QuestionManager
+        questionManager = new QuestionManager();
+        dejaRepondu = false;
+
+        //Change la visibilité des boutons centraux
+        CL_Bt.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -138,13 +167,15 @@ public class QuizActivity extends AppCompatActivity {
                         TXT_QuestionJ1.setText(MESSAGE_DEFAITE);
                         TXT_QuestionJ2.setText(MESSAGE_VICTOIRE);
                     }
+                    dejaRepondu = true;
 
                 } else {
                     Question questionEnCours = questionManager.nextQuestion();
-                    dejaRepondu = false;
                     reponseQuestion = questionEnCours.getReponse();
                     TXT_QuestionJ1.setText(questionEnCours.getIntitule());
                     TXT_QuestionJ2.setText(questionEnCours.getIntitule());
+
+                    dejaRepondu = false;
 
                     handler.postDelayed(this, 2000);
                 }

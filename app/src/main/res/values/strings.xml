@@ -12,6 +12,5 @@
     <string name="quiz_bt_rej">Rejouer</string>
     <string name="quiz_bt_menu">Menu</string>
     <string name="quiz_qst_j">Question 1</string>
-    <string name="quiz_score_j1">12</string>
-    <string name="quiz_score_j2">30</string>
+    <string name="quiz_score">0</string>
 </resources>

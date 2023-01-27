@@ -9,10 +9,14 @@ public class QuestionManager {
 
     QuestionManager() {
         super();
-        listeQuestion.add(new Question("Odin est un genie", true));
+        listeQuestion.add(new Question("Odin est petit fou", true));
         listeQuestion.add(new Question("Je suis une patate", true));
         listeQuestion.add(new Question("La vie est belle", true));
         listeQuestion.add(new Question("Rayan triche trop", true));
+        listeQuestion.add(new Question("L'android c'est trop bien", true));
+        listeQuestion.add(new Question("On est vendredi", true));
+        listeQuestion.add(new Question("J'ai froid", true));
+        listeQuestion.add(new Question("Oui oui baguette", true));
     }
 
     /**

@@ -18,7 +18,7 @@ public class Question {
         this.intitule = intitule;
     }
 
-    public boolean isReponse() {
+    public boolean getReponse() {
         return reponse;
     }
 

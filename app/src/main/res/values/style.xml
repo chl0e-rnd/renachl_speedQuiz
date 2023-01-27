@@ -2,7 +2,9 @@
 <resources>
     <style name="quiz.txt.score" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/app_margin</item>
+        <item name="android:layout_marginEnd">@dimen/app_margin</item>
         <item name="android:textSize">@dimen/quiz_font_size_score</item>
     </style>
 
@@ -18,6 +20,7 @@
         <item name="android:textSize">@dimen/quiz_font_qst</item>
         <item name="android:textAlignment">center</item>
         <item name="android:layout_marginTop">@dimen/quiz_space_bt</item>
+        <item name="android:layout_marginBottom">@dimen/quiz_space_bt</item>
     </style>
 
     <style name="quiz.bt.jeu" parent="Widget.Material3.Button.OutlinedButton">

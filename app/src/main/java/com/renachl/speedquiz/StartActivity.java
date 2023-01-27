@@ -36,8 +36,9 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent quizActivity = new Intent(StartActivity.this, QuizActivity.class);
-                quizActivity.putExtra("nomJoueur1", ET_SaisiJ1.getText());
-                quizActivity.putExtra("nomJoueur2", ET_SaisiJ2.getText());
+                System.out.println(ET_SaisiJ1.getText());
+                quizActivity.putExtra("nomJoueur1", ET_SaisiJ1.getText().toString());
+                quizActivity.putExtra("nomJoueur2", ET_SaisiJ2.getText().toString());
                 startActivity(quizActivity);
             }
         });
@@ -50,7 +51,5 @@ public class StartActivity extends AppCompatActivity {
                 ET_SaisiJ1.requestFocus();
             }
         });
-
     }
-
 }

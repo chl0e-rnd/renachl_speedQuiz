@@ -28,14 +28,12 @@ public class QuizActivity extends AppCompatActivity {
     private Button BT_J1;
     private Button BT_J2;
     private Button BT_Rejouer;
-    private ConstraintLayout CL_Bt;
+    private Button BT_Menu;
+    private ConstraintLayout CT_LAY_Bt;
 
     //Variable
-    private String nomJoueur1;
-    private String nomJoueur2;
     private int scoreJoueur1 = 0;
     private int scoreJoueur2 = 0;
-    private boolean dejaRepondu = false;
     private boolean reponseQuestion = false;
     private int nombreLancement = 0;
 
@@ -49,10 +47,6 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        Intent startActivity = getIntent();
-        nomJoueur1 = startActivity.getStringExtra("nomJoueur1");
-        nomJoueur2 = startActivity.getStringExtra("nomJoueur2");
-
         //Ajout des composants
         TXT_NomJoueur1 = findViewById(R.id.quiz_txt_nom_j1);
         TXT_NomJoueur2 = findViewById(R.id.quiz_txt_nom_j2);
@@ -63,20 +57,25 @@ public class QuizActivity extends AppCompatActivity {
         BT_J1 = findViewById(R.id.quiz_bt_j1);
         BT_J2 = findViewById(R.id.quiz_bt_j2);
         BT_Rejouer = findViewById(R.id.quiz_bt_rejouer);
-        CL_Bt = findViewById(R.id.quiz_layout_bt);
+        BT_Menu = findViewById(R.id.quiz_bt_menu);
+        CT_LAY_Bt = findViewById(R.id.quiz_layout_bt);
 
         //Cache les boutons pendant la partie
-        CL_Bt.setVisibility(View.INVISIBLE);
+        CT_LAY_Bt.setVisibility(View.INVISIBLE);
 
         //Rempli les champs de nom de joueurs
-        TXT_NomJoueur1.setText(nomJoueur1);
-        TXT_NomJoueur2.setText(nomJoueur2);
+        Intent startActivity = getIntent();
+        TXT_NomJoueur1.setText(startActivity.getStringExtra("nomJoueur1"));
+        TXT_NomJoueur2.setText(startActivity.getStringExtra("nomJoueur2"));
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Désactive les boutons
+        enabledButton(false);
 
         // Ne lance le minuteur seulement si c'est la premiere fois
         if (nombreLancement == 0) {
@@ -123,6 +122,14 @@ public class QuizActivity extends AppCompatActivity {
                 startCountDownTimer();
             }
         });
+
+        BT_Menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent StartActivity = new Intent(QuizActivity.this, StartActivity.class);
+                startActivity(StartActivity);
+            }
+        });
     }
 
     /**
@@ -142,12 +149,11 @@ public class QuizActivity extends AppCompatActivity {
         enabledButton(false);
 
         //Change la visibilité des boutons centraux
-        CL_Bt.setVisibility(View.INVISIBLE);
+        CT_LAY_Bt.setVisibility(View.INVISIBLE);
     }
 
     /**
      * Active ou désactive les boutons de jeu en fonction du paramètre
-     *
      * @param etat Etat à donner aux boutons
      */
     public void enabledButton(boolean etat) {
@@ -168,7 +174,7 @@ public class QuizActivity extends AppCompatActivity {
                 if (!questionManager.hasNextQuestion()) {
 
                     //Affiche les boutons
-                    CL_Bt.setVisibility(View.VISIBLE);
+                    CT_LAY_Bt.setVisibility(View.VISIBLE);
 
                     if (scoreJoueur2 == scoreJoueur1) {
                         TXT_QuestionJ1.setText(MESSAGE_EGALITE);
@@ -180,7 +186,6 @@ public class QuizActivity extends AppCompatActivity {
                         TXT_QuestionJ1.setText(MESSAGE_DEFAITE);
                         TXT_QuestionJ2.setText(MESSAGE_VICTOIRE);
                     }
-                    dejaRepondu = true;
 
                 } else {
                     //Active les boutons pour le jeu

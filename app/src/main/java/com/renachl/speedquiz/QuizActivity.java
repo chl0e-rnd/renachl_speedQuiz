@@ -18,7 +18,7 @@ public class QuizActivity extends AppCompatActivity {
     private Runnable questionRunnable = null;
     private QuestionManager questionManager = new QuestionManager();
 
-    // Composants
+    // Création des variables de composants
     private TextView TXT_NomJoueur1;
     private TextView TXT_NomJoueur2;
     private TextView TXT_QuestionJ1;
@@ -37,6 +37,7 @@ public class QuizActivity extends AppCompatActivity {
     private int scoreJoueur2 = 0;
     private boolean dejaRepondu = false;
     private boolean reponseQuestion = false;
+    private int nombreLancement = 0;
 
     private final String MESSAGE_VICTOIRE = "VICTOIREEEE";
     private final String MESSAGE_DEFAITE = "Pour la prochaine fois !";
@@ -76,7 +77,12 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        startCountDownTimer();
+
+        // Ne lance le minuteur seulement si c'est la première fois
+        if (nombreLancement == 0)  {
+            startCountDownTimer();
+            nombreLancement++;
+        }
 
         BT_J1.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -94,7 +100,6 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         BT_J2.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -117,7 +122,7 @@ public class QuizActivity extends AppCompatActivity {
         BT_Rejouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Rela
+                // Reset et relance le jeu
                 resetScreenData();
                 startCountDownTimer();
             }

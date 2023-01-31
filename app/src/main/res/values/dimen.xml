@@ -12,4 +12,5 @@
     <dimen name="quiz_font_size_score">70sp</dimen>
     <dimen name="quiz_space_bt">5dp</dimen>
 
+    <dimen name="config_space_titre">10dp</dimen>
 </resources>

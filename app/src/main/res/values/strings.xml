@@ -15,4 +15,15 @@
     <string name="quiz_bt_menu">Menu</string>
     <string name="quiz_qst_j">Question 1</string>
     <string name="quiz_score">0</string>
+
+    <string name="config_title">Configuration</string>
+    <string name="config_titre_delais">Délais questions</string>
+    <string name="config_titre_qst">Questions personnalisées</string>
+    <string name="config_titre_qst_int">Intitulé</string>
+    <string name="config_titre_qst_rep">Réponse</string>
+    <string name="config_delais">3 s</string>
+    <string name="config_bt_valider_delais">Valider</string>
+    <string name="config_qst_perso">Question</string>
+    <string name="config_rep_qst_vrai">Vrai</string>
+    <string name="config_rep_qst_faux">Faux</string>
 </resources>

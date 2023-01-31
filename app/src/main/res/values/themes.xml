@@ -12,5 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/vert_clair</item>
         <!-- Customize your theme here. -->
+        <item name="android:shadowColor">@color/vert_tres_clair</item>
     </style>
 </resources>

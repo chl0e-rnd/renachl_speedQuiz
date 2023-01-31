@@ -2,8 +2,8 @@ package com.renachl.speedquiz;
 
 public class Question {
 
-    private String intitule;
-    private boolean reponse;
+    private final String intitule;
+    private final boolean reponse;
 
     Question(String intitule, boolean reponse) {
         this.intitule = intitule;

@@ -70,6 +70,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
         super.onStart();
@@ -83,52 +84,38 @@ public class QuizActivity extends AppCompatActivity {
             nombreLancement++;
         }
 
-        BT_J1.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-                System.out.println("BT joueur 1 clique");
+        BT_J1.setOnClickListener(view -> {
+            System.out.println("BT joueur 1 clique");
 
-                //Active les boutons pour le jeu
-                enabledButton(false);
+            //Active les boutons pour le jeu
+            enabledButton(false);
 
-                //Change le score du joueur
-                scoreJoueur1 += reponseQuestion ? 1 : -1;
-                TXT_ScoreJ1.setText(Integer.toString(scoreJoueur1));
+            //Change le score du joueur
+            scoreJoueur1 += reponseQuestion ? 1 : -1;
+            TXT_ScoreJ1.setText(Integer.toString(scoreJoueur1));
 
-            }
         });
 
-        BT_J2.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-                System.out.println("BT joueur 2 cliqué");
+        BT_J2.setOnClickListener(view -> {
+            System.out.println("BT joueur 2 cliqué");
 
-                //Active les boutons pour le jeu
-                enabledButton(false);
+            //Active les boutons pour le jeu
+            enabledButton(false);
 
-                //Change le score du joueur
-                scoreJoueur2 += reponseQuestion ? 1 : -1;
-                TXT_ScoreJ2.setText(Integer.toString(scoreJoueur2));
-            }
+            //Change le score du joueur
+            scoreJoueur2 += reponseQuestion ? 1 : -1;
+            TXT_ScoreJ2.setText(Integer.toString(scoreJoueur2));
         });
 
-        BT_Rejouer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Reset et relance le jeu
-                resetScreenData();
-                startCountDownTimer();
-            }
+        BT_Rejouer.setOnClickListener(view -> {
+            // Reset et relance le jeu
+            resetScreenData();
+            startCountDownTimer();
         });
 
-        BT_Menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent StartActivity = new Intent(QuizActivity.this, StartActivity.class);
-                startActivity(StartActivity);
-            }
+        BT_Menu.setOnClickListener(view -> {
+            Intent StartActivity = new Intent(QuizActivity.this, StartActivity.class);
+            startActivity(StartActivity);
         });
     }
 

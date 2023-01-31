@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">speedQuiz</string>
 
+    <string name="menu_config">Config</string>
+
     <string name="start_titre">Speed Quiz</string>
     <string name="start_nom_j1">Joueur 1</string>
     <string name="start_nom_j2">Joueur 2</string>

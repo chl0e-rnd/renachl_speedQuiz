@@ -14,15 +14,8 @@ public class Question {
         return intitule;
     }
 
-    public void setIntitule(String intitule) {
-        this.intitule = intitule;
-    }
-
     public boolean getReponse() {
         return reponse;
     }
 
-    public void setReponse(boolean reponse) {
-        this.reponse = reponse;
-    }
 }

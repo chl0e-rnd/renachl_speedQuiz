@@ -78,8 +78,8 @@ public class QuizActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // Ne lance le minuteur seulement si c'est la première fois
-        if (nombreLancement == 0)  {
+        // Ne lance le minuteur seulement si c'est la premiere fois
+        if (nombreLancement == 0) {
             startCountDownTimer();
             nombreLancement++;
         }
@@ -88,16 +88,15 @@ public class QuizActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                System.out.println("BT joueur 1 cliqué");
-                if (!dejaRepondu) {
-                    if (reponseQuestion) {
-                        dejaRepondu = true;
-                        scoreJoueur1++;
-                    } else {
-                        scoreJoueur1--;
-                    }
-                    TXT_ScoreJ1.setText(Integer.toString(scoreJoueur1));
-                }
+                System.out.println("BT joueur 1 clique");
+
+                //Active les boutons pour le jeu
+                enabledButton(false);
+
+                //Change le score du joueur
+                scoreJoueur1 += reponseQuestion ? 1 : -1;
+                TXT_ScoreJ1.setText(Integer.toString(scoreJoueur1));
+
             }
         });
 
@@ -107,14 +106,11 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
                 System.out.println("BT joueur 2 cliqué");
 
-                if (!dejaRepondu) {
-                    if (reponseQuestion) {
-                        dejaRepondu = true;
-                        scoreJoueur2++;
-                    } else {
-                        scoreJoueur2--;
-                    }
-                }
+                //Active les boutons pour le jeu
+                enabledButton(false);
+
+                //Change le score du joueur
+                scoreJoueur2 += reponseQuestion ? 1 : -1;
                 TXT_ScoreJ2.setText(Integer.toString(scoreJoueur2));
             }
         });
@@ -141,10 +137,22 @@ public class QuizActivity extends AppCompatActivity {
 
         //Nouvel instance de QuestionManager
         questionManager = new QuestionManager();
-        dejaRepondu = false;
+
+        //Change l'état des boutons
+        enabledButton(false);
 
         //Change la visibilité des boutons centraux
         CL_Bt.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * Active ou désactive les boutons de jeu en fonction du paramètre
+     *
+     * @param etat Etat à donner aux boutons
+     */
+    public void enabledButton(boolean etat) {
+        BT_J1.setEnabled(etat);
+        BT_J2.setEnabled(etat);
     }
 
     /**
@@ -175,12 +183,15 @@ public class QuizActivity extends AppCompatActivity {
                     dejaRepondu = true;
 
                 } else {
+                    //Active les boutons pour le jeu
+                    enabledButton(true);
+
+                    //Récupère la question avec son intitulé et sa réponse
                     Question questionEnCours = questionManager.nextQuestion();
                     reponseQuestion = questionEnCours.getReponse();
                     TXT_QuestionJ1.setText(questionEnCours.getIntitule());
                     TXT_QuestionJ2.setText(questionEnCours.getIntitule());
 
-                    dejaRepondu = false;
 
                     handler.postDelayed(this, 2000);
                 }

@@ -17,8 +17,8 @@
     <string name="quiz_score">0</string>
 
     <string name="config_title">Configuration</string>
-    <string name="config_titre_delais">Délais questions</string>
-    <string name="config_titre_qst">Questions personnalisées</string>
+    <string name="config_titre_delais">Délais</string>
+    <string name="config_titre_qst">Questions</string>
     <string name="config_titre_qst_int">Intitulé</string>
     <string name="config_titre_qst_rep">Réponse</string>
     <string name="config_delais">3 s</string>

@@ -26,17 +26,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/config_txt_titre" />
 
+
         <!-- Continuous slider -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/config_layout_slide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/config_space_titre"
+            android:layout_marginHorizontal="@dimen/app_margin"
+            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_delais">
+
         <com.google.android.material.slider.Slider
             android:id="@+id/config_slide_delais"
-            android:layout_width="340dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/app_margin"
-            android:layout_marginTop="@dimen/config_space_titre"
             android:valueFrom="0.5"
             android:stepSize="0.5"
             android:valueTo="5"
-            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_delais"
+            app:labelBehavior="gone"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
@@ -44,17 +53,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/app_margin"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="6dp"
             android:text="@string/config_delais"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/config_txt_titre_delais" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <Button
             style="@style/config_bt_valider"
             android:id="@+id/config_bt_delais_valider"
             android:text="@string/config_bt_valider_delais"
-            app:layout_constraintTop_toBottomOf="@id/config_slide_delais"
+            app:layout_constraintTop_toBottomOf="@id/config_layout_slide"
             app:layout_constraintEnd_toEndOf="parent"
             />
 
@@ -66,23 +78,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/config_bt_delais_valider" />
 
-        <TextView
-            style="@style/config_txt_titre_h2"
-            android:id="@+id/config_txt_titre_qst_int"
-            android:text="@string/config_titre_qst_int"
-            android:layout_marginTop="@dimen/config_space_titre"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/config_txt_titre_qst_perso" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/config_layout_question_perso"
-
             android:layout_marginHorizontal="@dimen/app_margin"
             android:layout_marginTop="@dimen/config_space_titre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/config_qst_perso"
-            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_qst_int" >
+            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_qst_perso" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -90,13 +93,6 @@
                     />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            style="@style/config_txt_titre_h2"
-            android:id="@+id/config_txt_titre_qst_rep"
-            android:text="@string/config_titre_qst_rep"
-            android:layout_marginTop="@dimen/config_space_titre"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/config_layout_question_perso" />
 
         <RadioGroup
             android:id="@+id/config_rdGrp_rep"
@@ -104,7 +100,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_qst_rep"
+            android:layout_marginTop="@dimen/config_space_titre"
+            app:layout_constraintTop_toBottomOf="@id/config_layout_question_perso"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 

@@ -12,11 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.renachl.speedquiz.Controllers.QuestionManager;
+import com.renachl.speedquiz.Models.Question;
+
 public class QuizActivity extends AppCompatActivity {
 
     private Handler handler;
     private Runnable questionRunnable = null;
-    private QuestionManager questionManager = new QuestionManager();
+    private QuestionManager questionManager = new QuestionManager(this);
 
     // Création des variables de composants
     private TextView TXT_NomJoueur1;
@@ -130,7 +133,7 @@ public class QuizActivity extends AppCompatActivity {
         TXT_ScoreJ2.setText("0");
 
         //Nouvel instance de QuestionManager
-        questionManager = new QuestionManager();
+        questionManager = new QuestionManager(this);
 
         //Change l'état des boutons
         enabledButton(false);
@@ -162,6 +165,9 @@ public class QuizActivity extends AppCompatActivity {
 
                     //Affiche les boutons
                     CT_LAY_Bt.setVisibility(View.VISIBLE);
+
+                    //Désactiver les boutons
+                    enabledButton(false);
 
                     if (scoreJoueur2 == scoreJoueur1) {
                         TXT_QuestionJ1.setText(MESSAGE_EGALITE);

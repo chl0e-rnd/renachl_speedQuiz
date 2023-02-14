@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -19,7 +20,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private Handler handler;
     private Runnable questionRunnable = null;
-    private QuestionManager questionManager = new QuestionManager(this);
+    private QuestionManager questionManager;
 
     // Création des variables de composants
     private TextView TXT_NomJoueur1;
@@ -40,6 +41,7 @@ public class QuizActivity extends AppCompatActivity {
     private boolean reponseQuestion = false;
     private int nombreLancement = 0;
 
+    //Variable de configuration
     private final String MESSAGE_VICTOIRE = "VICTOIREEEE";
     private final String MESSAGE_DEFAITE = "Pour la prochaine fois !";
     private final String MESSAGE_EGALITE = "Egalité !!";
@@ -71,9 +73,10 @@ public class QuizActivity extends AppCompatActivity {
         TXT_NomJoueur1.setText(startActivity.getStringExtra("nomJoueur1"));
         TXT_NomJoueur2.setText(startActivity.getStringExtra("nomJoueur2"));
 
+        questionManager = new QuestionManager(this);
+
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
         super.onStart();
@@ -88,8 +91,6 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         BT_J1.setOnClickListener(view -> {
-            System.out.println("BT joueur 1 clique");
-
             //Active les boutons pour le jeu
             enabledButton(false);
 
@@ -100,8 +101,6 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         BT_J2.setOnClickListener(view -> {
-            System.out.println("BT joueur 2 cliqué");
-
             //Active les boutons pour le jeu
             enabledButton(false);
 
@@ -155,6 +154,7 @@ public class QuizActivity extends AppCompatActivity {
      * Déclenche la recherche de question/réponse et stop le callback une fois terminé
      */
     private void startQuestionIterative() {
+        SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
 
         handler = new Handler();
         questionRunnable = new Runnable() {
@@ -191,7 +191,7 @@ public class QuizActivity extends AppCompatActivity {
                     TXT_QuestionJ2.setText(questionEnCours.getIntitule());
 
 
-                    handler.postDelayed(this, 2000);
+                    handler.postDelayed(this, prefs.getInt("qstDelai", ConfigActivity.QST_DELAI));
                 }
             }
         };
@@ -217,4 +217,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         }.start();
     }
+
+
 }

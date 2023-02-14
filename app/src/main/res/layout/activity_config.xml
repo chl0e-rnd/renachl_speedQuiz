@@ -1,131 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfigActivity">
 
-        <TextView
-            android:id="@+id/config_txt_titre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:text="@string/config_title"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/config_txt_titre"
-            android:id="@+id/config_txt_titre_delais"
-            android:layout_marginTop="50dp"
-            android:text="@string/config_titre_delais"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/config_txt_titre" />
+    <TextView
+        android:id="@+id/config_txt_titre"
+        style="@style/app_txt_h1"
+        android:text="@string/config_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/config_txt_titre_delais"
+        style="@style/config_txt_titre"
+        android:text="@string/config_titre_delais"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/config_txt_titre" />
 
 
-        <!-- Continuous slider -->
+    <com.google.android.material.slider.Slider
+        android:id="@+id/config_slide_delais"
+        style="@style/config_slide"
+        android:stepSize="0.5"
+        android:valueFrom="0.5"
+        android:valueTo="5"
+        app:layout_constraintTop_toBottomOf="@+id/config_txt_titre_delais"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/config_layout_slide"
+    <Button
+        android:id="@+id/config_bt_tst"
+        style="@style/quiz.bt.jeu"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/app_margin"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/config_slide_delais" />
+
+
+    <TextView
+        android:id="@+id/config_txt_titre_qst_perso"
+        style="@style/config_txt_titre"
+        android:text="@string/config_titre_qst"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/config_bt_tst" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/config_layout_question_perso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/config_space_titre"
+        android:hint="@string/config_qst_perso"
+        app:layout_constraintTop_toBottomOf="@id/config_txt_titre_qst_perso">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/config_ed_initule_qst"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/config_space_titre"
-            android:layout_marginHorizontal="@dimen/app_margin"
-            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_delais">
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/config_slide_delais"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:valueFrom="0.5"
-            android:stepSize="0.5"
-            android:valueTo="5"
-            app:labelBehavior="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/config_txt_delais"
+    <RadioGroup
+        android:id="@+id/config_rdGrp_rep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/config_space_titre"
+        android:checkedButton="@+id/config_rdBt_vrai"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/config_layout_question_perso">
+
+        <RadioButton
+            android:id="@+id/config_rdBt_vrai"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/app_margin"
-            android:layout_marginTop="6dp"
-            android:text="@string/config_delais"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:text="@string/config_rep_qst_vrai" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <Button
-            style="@style/config_bt_valider"
-            android:id="@+id/config_bt_delais_valider"
-            android:text="@string/config_bt_valider_delais"
-            app:layout_constraintTop_toBottomOf="@id/config_layout_slide"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-        <TextView
-            style="@style/config_txt_titre"
-            android:id="@+id/config_txt_titre_qst_perso"
-            android:layout_marginTop="50dp"
-            android:text="@string/config_titre_qst"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/config_bt_delais_valider" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/config_layout_question_perso"
-            android:layout_marginHorizontal="@dimen/app_margin"
-            android:layout_marginTop="@dimen/config_space_titre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/config_qst_perso"
-            app:layout_constraintTop_toBottomOf="@id/config_txt_titre_qst_perso" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <RadioGroup
-            android:id="@+id/config_rdGrp_rep"
-            android:checkedButton="@+id/config_rdBt_vrai"
+        <RadioButton
+            android:id="@+id/config_rdBt_faux"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/config_space_titre"
-            app:layout_constraintTop_toBottomOf="@id/config_layout_question_perso"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="25dp"
+            android:text="@string/config_rep_qst_faux" />
+    </RadioGroup>
 
-                <RadioButton
-                    android:id="@+id/config_rdBt_vrai"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/config_rep_qst_vrai"
-                    />
-                <RadioButton
-                    android:id="@+id/config_rdBt_faux"
-                    android:layout_marginStart="25dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/config_rep_qst_faux"
-                    />
-        </RadioGroup>
+    <Button
+        android:id="@+id/config_bt_qst_valider"
+        style="@style/config_bt_valider"
+        android:text="@string/config_bt_valider_delais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/config_rdGrp_rep" />
 
-        <Button
-            style="@style/config_bt_valider"
-            android:id="@+id/config_bt_qst_valider"
-            android:text="@string/config_bt_valider_delais"
-            app:layout_constraintTop_toBottomOf="@id/config_rdGrp_rep"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+    <TextView
+        android:id="@+id/config_txt_nbr_qst"
+        style="@style/config_txt_titre"
+        android:text="@string/config_titre_nbr_qst"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/config_bt_qst_valider" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/config_slide_nbr_qst"
+        style="@style/config_slide"
+        android:stepSize="1"
+        android:valueFrom="5"
+        android:valueTo="50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/config_txt_nbr_qst" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

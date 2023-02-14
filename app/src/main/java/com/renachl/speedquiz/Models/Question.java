@@ -8,7 +8,7 @@ public class Question {
     private final boolean reponse;
 
     public Question(Cursor cursor) {
-        intitule = cursor.getString(cursor.getColumnIndexOrThrow("question"));
+        intitule = cursor.getString(cursor.getColumnIndexOrThrow("intitule"));
         reponse = cursor.getInt(cursor.getColumnIndexOrThrow("reponse")) == 1;
     }
 

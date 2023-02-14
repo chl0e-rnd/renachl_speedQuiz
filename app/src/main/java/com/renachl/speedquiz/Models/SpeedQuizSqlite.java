@@ -9,13 +9,17 @@ public class SpeedQuizSqlite extends SQLiteOpenHelper {
     static String DB_NAME = "SpeedQuiz.db";
     static int DB_VERSION = 1;
 
+    private static final String NOM_TABLE = "quiz";
+    private static final String COL_QST = "intitule";
+    private static final String COL_REP = "reponse";
+
     public SpeedQuizSqlite(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sqlCreateDataTable = "CREATE TABLE quiz (idQuiz INTEGER PRIMARY KEY, question TEXT, reponse BOOLEAN)";
+        String sqlCreateDataTable = "CREATE TABLE " + NOM_TABLE + " (idQuiz INTEGER PRIMARY KEY, " + COL_QST + " TEXT, " + COL_REP + " INTEGER)";
         sqLiteDatabase.execSQL(sqlCreateDataTable);
 
         sqLiteDatabase.execSQL("INSERT INTO quiz VALUES (null, \"Odin est petit fou\", 0)");

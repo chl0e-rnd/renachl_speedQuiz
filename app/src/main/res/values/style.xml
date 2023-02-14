@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="app_txt_h1" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">32sp</item>
+        <item name="android:layout_marginTop">65dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
     <style name="start.txt.nomJoueur" parent="Widget.Material3.TextInputEditText.OutlinedBox">
         <item name="android:maxLines">1</item>
         <item name="android:inputType">text</item>
@@ -48,18 +55,19 @@
         <item name="android:layout_marginStart">@dimen/app_margin</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="config_txt_titre_h2" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginStart">@dimen/app_margin</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">50dp</item>
     </style>
 
     <style name="config_bt_valider" parent="Widget.Material3.Button.TonalButton">
         <item name="backgroundTint">@color/vert_tres_clair</item>
         <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/app_margin</item>
+        <item name="android:layout_marginEnd">@dimen/app_margin</item>
+    </style>
+
+    <style name="config_slide" parent="Widget.Material3.Slider">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/app_margin</item>
         <item name="android:layout_marginEnd">@dimen/app_margin</item>

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SpeedQuizSqlite extends SQLiteOpenHelper {
 
-    static String DB_NAME = "SpeedQuiz.db";
+    public final static String DB_NAME = "SpeedQuiz.db";
     static int DB_VERSION = 1;
 
     public static final String NOM_TABLE = "quiz";
@@ -31,11 +31,10 @@ public class SpeedQuizSqlite extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO quiz VALUES (null, \"On est vendredi\", 0)");
         sqLiteDatabase.execSQL("INSERT INTO quiz VALUES (null, \"Petit filou\", 0)");
         sqLiteDatabase.execSQL("INSERT INTO quiz VALUES (null, \"Odin est petit fou\", 0)");
-        sqLiteDatabase.execSQL("INSERT INTO quiz VALUES (null, \"Odin est petit fou\", 0)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        onCreate(sqLiteDatabase);
     }
 }

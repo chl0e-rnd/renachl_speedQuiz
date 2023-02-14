@@ -13,7 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.renachl.speedquiz.ConfigActivity;
 import com.renachl.speedquiz.Models.Question;
 
-import com.renachl.speedquiz.Models.Question;
 import com.renachl.speedquiz.Models.SpeedQuizSqlite;
 import com.renachl.speedquiz.R;
 
@@ -27,6 +26,7 @@ public class QuestionManager {
 
     /**
      * Constructeur de Question manager
+     *
      * @param context Context de l'application
      */
     public QuestionManager(Context context) {
@@ -36,6 +36,7 @@ public class QuestionManager {
 
     /**
      * Donne une question de la liste
+     *
      * @return La question
      */
     public Question nextQuestion() {
@@ -46,6 +47,7 @@ public class QuestionManager {
 
     /**
      * Détermine si une question en fonction de son index n'est pas la dernière de la liste
+     *
      * @return True si la question n'est pas la dernière, false sinon
      */
     public boolean hasNextQuestion() {
@@ -54,6 +56,7 @@ public class QuestionManager {
 
     /**
      * Initialose le nombre de question choisie
+     *
      * @param context Contexte de l'application
      */
     private void initNombreQuestion(Context context) {
@@ -63,6 +66,7 @@ public class QuestionManager {
 
     /**
      * Charge une sllite de question depuis la DB
+     *
      * @param context Le contexte de l'application pour passer la query
      */
     private void initQuestionList(Context context) {
@@ -81,9 +85,10 @@ public class QuestionManager {
 
     /**
      * Ajoute une nouvelle question à la base de données
-     * @param context Context de l'appplication
+     *
+     * @param context  Context de l'appplication
      * @param intitule Intitule de la question à ajouter
-     * @param reponse Réponse de la question à ajouter
+     * @param reponse  Réponse de la question à ajouter
      */
     public static void addNewQuestion(Context context, String intitule, String reponse) {
         SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
@@ -95,7 +100,7 @@ public class QuestionManager {
 
         //Ajout de la réponse à la question
         String stringReponse = context.getString(R.string.config_rep_qst_vrai);
-        contentValues.put("reponse", reponse.equals(stringReponse)  ? 1 : 0);
+        contentValues.put("reponse", reponse.equals(stringReponse) ? 1 : 0);
 
         //Ajoute les données à la base
         db.insert("quiz", null, contentValues);
@@ -107,6 +112,7 @@ public class QuestionManager {
 
     /**
      * Retourne le nombre de questions qui se trouve dans la table
+     *
      * @param context Contexte de l'application
      * @return Nombre de question
      */
@@ -118,4 +124,19 @@ public class QuestionManager {
         return nombreQuestion;
     }
 
+    public static void supprimer(Context context) {
+        SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+//        db.execSQL("DELETE FROM \"quiz\"");
+
+        db.execSQL("INSERT INTO quiz VALUES (null, \"Odin est petit fou\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"Je suis une patate\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"Les hirondelles sont bleues\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"L'informatique c'est vraiment trop cool\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"J'ai froid\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"Il faut que je travaille aujourd'hui\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"On est vendredi\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"Petit filou\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null, \"Odin est petit fou\", 0)");
+    }
 }

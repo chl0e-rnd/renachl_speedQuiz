@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.renachl.speedquiz.Controllers.QuestionManager;
 import com.renachl.speedquiz.Models.Question;
+import com.renachl.speedquiz.Models.SpeedQuizSqlite;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 

@@ -96,7 +96,7 @@ public class QuizActivity extends AppCompatActivity {
 
             //Change le score du joueur
             scoreJoueur1 += reponseQuestion ? 1 : -1;
-            TXT_ScoreJ1.setText(Integer.toString(scoreJoueur1));
+            TXT_ScoreJ1.setText(scoreJoueur1);
 
         });
 
@@ -106,7 +106,7 @@ public class QuizActivity extends AppCompatActivity {
 
             //Change le score du joueur
             scoreJoueur2 += reponseQuestion ? 1 : -1;
-            TXT_ScoreJ2.setText(Integer.toString(scoreJoueur2));
+            TXT_ScoreJ2.setText(scoreJoueur2);
         });
 
         BT_Rejouer.setOnClickListener(view -> {
@@ -217,6 +217,4 @@ public class QuizActivity extends AppCompatActivity {
             }
         }.start();
     }
-
-
 }

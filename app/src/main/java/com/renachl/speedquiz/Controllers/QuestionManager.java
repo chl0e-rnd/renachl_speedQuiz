@@ -1,10 +1,16 @@
 package com.renachl.speedquiz.Controllers;
 
+
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.renachl.speedquiz.ConfigActivity;
 import com.renachl.speedquiz.Models.Question;
 
 import com.renachl.speedquiz.Models.Question;
@@ -17,7 +23,7 @@ public class QuestionManager {
 
     private int indexQuestion = 0;
     private ArrayList<Question> listQuestion = new ArrayList<>();
-    private int nombreQuestion = listQuestion.size();
+    private int nombreQuestion = 0;
 
     /**
      * Constructeur de Question manager
@@ -25,6 +31,7 @@ public class QuestionManager {
      */
     public QuestionManager(Context context) {
         initQuestionList(context);
+        initNombreQuestion(context);
     }
 
     /**
@@ -42,7 +49,16 @@ public class QuestionManager {
      * @return True si la question n'est pas la dernière, false sinon
      */
     public boolean hasNextQuestion() {
-        return indexQuestion < listQuestion.size();
+        return indexQuestion < nombreQuestion - 1;
+    }
+
+    /**
+     * Initialose le nombre de question choisie
+     * @param context Contexte de l'application
+     */
+    private void initNombreQuestion(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
+        nombreQuestion = prefs.getInt("nbrQst", ConfigActivity.QST_DELAI);
     }
 
     /**
@@ -87,4 +103,19 @@ public class QuestionManager {
         //Ferme la connexion à la base de données
         db.close();
     }
+
+
+    /**
+     * Retourne le nombre de questions qui se trouve dans la table
+     * @param context Contexte de l'application
+     * @return Nombre de question
+     */
+    public static long getNombreQuestion(Context context) {
+        SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        long nombreQuestion = DatabaseUtils.queryNumEntries(db, SpeedQuizSqlite.NOM_TABLE);
+        db.close();
+        return nombreQuestion;
+    }
+
 }

@@ -111,7 +111,7 @@
         android:id="@+id/config_slide_nbr_qst"
         style="@style/config_slide"
         android:stepSize="1"
-        android:valueFrom="5"
+        android:valueFrom="1"
         android:valueTo="50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/config_txt_nbr_qst" />

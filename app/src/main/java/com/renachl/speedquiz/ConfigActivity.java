@@ -1,30 +1,23 @@
 package com.renachl.speedquiz;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.renachl.speedquiz.Controllers.QuestionManager;
-import com.renachl.speedquiz.Models.Question;
 
 
 public class ConfigActivity extends AppCompatActivity {
 
     private Slider SL_Delais;
+    private Slider SL_NbrQst;
     private Button BT_TestDelais;
     private Button BT_ValiderNvQst;
     private EditText ED_IntituleQst;
@@ -34,7 +27,6 @@ public class ConfigActivity extends AppCompatActivity {
     private Runnable questionRunnable = null;
 
     public static final int QST_DELAI = 2000;
-    public static int nombreQuestion = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +35,7 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
 
         SL_Delais = findViewById(R.id.config_slide_delais);
+        SL_NbrQst = findViewById(R.id.config_slide_nbr_qst);
         BT_TestDelais = findViewById(R.id.config_bt_tst);
 
         ED_IntituleQst = findViewById(R.id.config_ed_initule_qst);
@@ -52,6 +45,10 @@ public class ConfigActivity extends AppCompatActivity {
         //Change la valeur du slider pour la mettre à celle actuelle
         SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
         changeValueSliderDelais(prefs.getInt("qstDelai", QST_DELAI));
+
+        //Change la valeur max du slider en fonction du nombre de question possible
+        SL_NbrQst.setValueTo(QuestionManager.getNombreQuestion(this));
+        SL_NbrQst.setValue(prefs.getInt("nbrQst", (int) QuestionManager.getNombreQuestion(this)));
 
         //Le bouton pour valider les question est grisé
         BT_ValiderNvQst.setEnabled(false);
@@ -73,6 +70,13 @@ public class ConfigActivity extends AppCompatActivity {
             editor.apply();
         });
 
+        //Change le nombre de question pour une partie
+        SL_NbrQst.addOnChangeListener((slider, value, fromUser) -> {
+            SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("nbrQst", (int) value);
+            editor.apply();
+        });
 
         ED_IntituleQst.addTextChangedListener(new TextWatcher() {
             @Override
@@ -94,7 +98,11 @@ public class ConfigActivity extends AppCompatActivity {
         //Ajoute la nouvelle question à la base de données, vide le champs désactive le bt
         BT_ValiderNvQst.setOnClickListener(view -> {
             String reponse = ((RadioButton) findViewById(RDGRP_RepQst.getCheckedRadioButtonId())).getText().toString();
+
+            SL_NbrQst.setValueTo((int) QuestionManager.getNombreQuestion(this));
+
             addQstPerso(ED_IntituleQst.getText().toString(), reponse);
+
             ED_IntituleQst.setText("");
             ED_IntituleQst.requestFocus();
         });
@@ -102,7 +110,6 @@ public class ConfigActivity extends AppCompatActivity {
 
     /**
      * Ajoute une question à la base de données
-     *
      * @param intitule Intitulé de la nouvelle question
      * @param reponse  Réponse de la nouvellle question
      */

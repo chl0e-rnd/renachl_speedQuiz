@@ -9,9 +9,9 @@ public class SpeedQuizSqlite extends SQLiteOpenHelper {
     static String DB_NAME = "SpeedQuiz.db";
     static int DB_VERSION = 1;
 
-    private static final String NOM_TABLE = "quiz";
-    private static final String COL_QST = "intitule";
-    private static final String COL_REP = "reponse";
+    public static final String NOM_TABLE = "quiz";
+    public static final String COL_QST = "intitule";
+    public static final String COL_REP = "reponse";
 
     public SpeedQuizSqlite(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

@@ -51,9 +51,10 @@ public class ConfigActivity extends AppCompatActivity {
 
         //Change la valeur du slider pour la mettre à celle actuelle
         SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
-        float valueDelais = (float) (prefs.getInt("qstDelai", QST_DELAI) / 1000.0);
-        SL_Delais.setValue(valueDelais);
-        displaySliderValue(valueDelais);
+        changeValueSliderDelais(prefs.getInt("qstDelai", QST_DELAI));
+
+        //Le bouton pour valider les question est grisé
+        BT_ValiderNvQst.setEnabled(false);
     }
 
 
@@ -61,22 +62,12 @@ public class ConfigActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
-        handler = new Handler();
-
-        questionRunnable = new Runnable() {
-            int isVisible = 0;
-            @Override
-            public void run() {
-                BT_TestDelais.setVisibility(isVisible);
-                isVisible = isVisible == 4 ? 0 : 4;
-                handler.postDelayed(this, prefs.getInt("qstDelai", ConfigActivity.QST_DELAI));
-            }
-        };
-        handler.postDelayed(questionRunnable,1000);
+        //Lance le bouton de tst de délais
+        startBtDelaisTest();
 
         //Change la valeur du temps dans les config de l'application au mouvement du slider
         SL_Delais.addOnChangeListener((slider, value, fromUser) -> {
+            SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("qstDelai", (int) (SL_Delais.getValue() * 1000.0));
             editor.apply();
@@ -107,16 +98,6 @@ public class ConfigActivity extends AppCompatActivity {
             ED_IntituleQst.setText("");
             ED_IntituleQst.requestFocus();
         });
-
-    }
-
-    /**
-     * Affiche la valeur du slider dans la text view
-     *
-     * @param value Valeur à afficher
-     */
-    private void displaySliderValue(float value) {
-        String txtDelais = SL_Delais.getValue() + " s";
     }
 
     /**
@@ -127,5 +108,34 @@ public class ConfigActivity extends AppCompatActivity {
      */
     private void addQstPerso(String intitule, String reponse) {
         QuestionManager.addNewQuestion(this, intitule, reponse);
+    }
+
+    /**
+     * Change la valeur du slider depuis des millisecondes pour le passer en valeur à virgule
+     * @param milliSeconde Valeur en millisecondes
+     */
+    private void changeValueSliderDelais(int milliSeconde) {
+        float valueDelais = (float) (milliSeconde / 1000.0);
+        SL_Delais.setValue(valueDelais);
+    }
+
+    /**
+     * Lance le clignotement du bouton qui prévisualise le délai entre chaque questions
+     */
+    private void startBtDelaisTest() {
+        SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
+
+        handler = new Handler();
+        questionRunnable = new Runnable() {
+            int isVisible = 0;
+
+            @Override
+            public void run() {
+                BT_TestDelais.setVisibility(isVisible);
+                isVisible = isVisible == 4 ? 0 : 4;
+                handler.postDelayed(this, prefs.getInt("qstDelai", QST_DELAI));
+            }
+        };
+        handler.postDelayed(questionRunnable, 1000);
     }
 }

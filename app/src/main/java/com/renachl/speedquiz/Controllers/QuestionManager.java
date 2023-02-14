@@ -20,13 +20,12 @@ import java.util.ArrayList;
 
 public class QuestionManager {
 
-    private int indexQuestion = 0;
     private ArrayList<Question> listQuestion = new ArrayList<>();
-    private int nombreQuestion = 0;
+    private int nbrQstChoisie = 0;
+    private int nbrQstPosee = 0;
 
     /**
-     * Constructeur de Question manager
-     *
+     * Constructeur de QuestionManager
      * @param context Context de l'application
      */
     public QuestionManager(Context context) {
@@ -40,18 +39,18 @@ public class QuestionManager {
      * @return La question
      */
     public Question nextQuestion() {
-        Question currentQuestion = listQuestion.get(indexQuestion);
-        indexQuestion++;
+        Question currentQuestion = listQuestion.get(getRandomNumber(0, listQuestion.size() - 1));
+        nbrQstPosee++;
+        listQuestion.remove(currentQuestion);
         return currentQuestion;
     }
 
     /**
      * Détermine si une question en fonction de son index n'est pas la dernière de la liste
-     *
      * @return True si la question n'est pas la dernière, false sinon
      */
     public boolean hasNextQuestion() {
-        return indexQuestion < nombreQuestion - 1;
+        return nbrQstPosee < nbrQstChoisie;
     }
 
     /**
@@ -61,7 +60,7 @@ public class QuestionManager {
      */
     private void initNombreQuestion(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
-        nombreQuestion = prefs.getInt("nbrQst", ConfigActivity.QST_DELAI);
+        nbrQstChoisie = prefs.getInt("nbrQst", ConfigActivity.QST_DELAI);
     }
 
     /**
@@ -109,10 +108,8 @@ public class QuestionManager {
         db.close();
     }
 
-
     /**
      * Retourne le nombre de questions qui se trouve dans la table
-     *
      * @param context Contexte de l'application
      * @return Nombre de question
      */
@@ -123,6 +120,17 @@ public class QuestionManager {
         db.close();
         return nombreQuestion;
     }
+
+    /**
+     * Obtient un nombre aléatoire entre deux bornes
+     * @param min Borne min
+     * @param max Borne max
+     * @return un nombre aléatoire
+     */
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
 
     public static void supprimer(Context context) {
         SpeedQuizSqlite helper = new SpeedQuizSqlite(context);

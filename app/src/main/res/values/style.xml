@@ -55,7 +55,7 @@
         <item name="android:layout_marginStart">@dimen/app_margin</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_marginTop">20dp</item>
     </style>
 
     <style name="config_bt_valider" parent="Widget.Material3.Button.TonalButton">

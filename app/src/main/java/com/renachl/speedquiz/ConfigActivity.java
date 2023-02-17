@@ -1,6 +1,8 @@
 package com.renachl.speedquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +22,7 @@ public class ConfigActivity extends AppCompatActivity {
     private Slider SL_NbrQst;
     private Button BT_TestDelais;
     private Button BT_ValiderNvQst;
+    private Button BT_GererQst;
     private EditText ED_IntituleQst;
     private RadioGroup RDGRP_RepQst;
 
@@ -42,6 +45,7 @@ public class ConfigActivity extends AppCompatActivity {
         RDGRP_RepQst = findViewById(R.id.config_rdGrp_rep);
         BT_ValiderNvQst = findViewById(R.id.config_bt_qst_valider);
 
+        BT_GererQst = findViewById(R.id.config_bt_li_qst);
         //Change la valeur du slider pour la mettre à celle actuelle
         SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
         changeValueSliderDelais(prefs.getInt("qstDelai", QST_DELAI));
@@ -105,6 +109,12 @@ public class ConfigActivity extends AppCompatActivity {
 
             ED_IntituleQst.setText("");
             ED_IntituleQst.requestFocus();
+        });
+
+        //Ouvre l'activity pour afficher la liste de question
+        BT_GererQst.setOnClickListener(view -> {
+            Intent questionActivity = new Intent(ConfigActivity.this, QuestionActivity.class);
+            startActivity(questionActivity);
         });
     }
 

@@ -35,7 +35,6 @@ public class QuestionManager {
 
     /**
      * Donne une question de la liste
-     *
      * @return La question
      */
     public Question nextQuestion() {

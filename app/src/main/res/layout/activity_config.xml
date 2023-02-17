@@ -101,11 +101,29 @@
         app:layout_constraintTop_toBottomOf="@id/config_rdGrp_rep" />
 
     <TextView
+        android:id="@+id/config_txt_li_qst"
+        style="@style/config_txt_titre"
+        android:layout_width="wrap_content"
+        android:text="@string/config_titre_modif_qst"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/config_bt_qst_valider" />
+
+    <Button
+        style="?attr/materialIconButtonOutlinedStyle"
+        android:id="@+id/config_bt_li_qst"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        app:layout_constraintStart_toEndOf="@id/config_txt_li_qst"
+        app:layout_constraintTop_toTopOf="@id/config_txt_li_qst"
+        android:layout_marginStart="10dp"
+        />
+
+    <TextView
         android:id="@+id/config_txt_nbr_qst"
         style="@style/config_txt_titre"
         android:text="@string/config_titre_nbr_qst"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/config_bt_qst_valider" />
+        app:layout_constraintTop_toBottomOf="@+id/config_bt_li_qst" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/config_slide_nbr_qst"
@@ -115,5 +133,7 @@
         android:valueTo="50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/config_txt_nbr_qst" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

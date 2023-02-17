@@ -18,11 +18,9 @@
 
     <string name="config_title">Configuration</string>
     <string name="config_titre_delais">Délais</string>
-    <string name="config_titre_qst">Questions</string>
+    <string name="config_titre_qst">Ajouter une question</string>
+    <string name="config_titre_modif_qst">Gérer liste de questions</string>
     <string name="config_titre_nbr_qst">Nombre de questions</string>
-    <string name="config_titre_qst_int">Intitulé</string>
-    <string name="config_titre_qst_rep">Réponse</string>
-    <string name="config_delais">3 s</string>
     <string name="config_bt_valider_delais">Valider</string>
     <string name="config_qst_perso">Question</string>
     <string name="config_rep_qst_vrai">Vrai</string>

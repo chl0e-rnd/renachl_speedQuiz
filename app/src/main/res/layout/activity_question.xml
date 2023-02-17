@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".QuestionActivity">
 
+    <ListView
+        android:id="@+id/qst_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

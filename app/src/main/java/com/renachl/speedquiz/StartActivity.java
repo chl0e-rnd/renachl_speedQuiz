@@ -49,7 +49,6 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent quizActivity = new Intent(StartActivity.this, QuizActivity.class);
-                System.out.println(ET_SaisiJ1.getText());
                 quizActivity.putExtra("nomJoueur1", ET_SaisiJ1.getText().toString());
                 quizActivity.putExtra("nomJoueur2", ET_SaisiJ2.getText().toString());
                 startActivity(quizActivity);

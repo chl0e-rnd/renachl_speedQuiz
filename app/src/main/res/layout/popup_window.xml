@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/app_margin"
+    android:background="@color/blanc"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/qst_txt_titre_modif"
+        style="@style/config_txt_titre"
+        android:text="@string/qst_modif_titre"
+        android:layout_marginStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/restart_game_button"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        app:icon="@drawable/ic_action_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/qst_layout_modif_qst"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/config_space_titre"
+        app:layout_constraintTop_toBottomOf="@id/qst_txt_titre_modif"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/config_ed_initule_qst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/qst_rdGrp_rep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/config_space_titre"
+        android:checkedButton="@+id/config_rdBt_vrai"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qst_layout_modif_qst">
+
+        <RadioButton
+            android:id="@+id/config_rdBt_vrai"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/config_rep_qst_vrai" />
+
+        <RadioButton
+            android:id="@+id/config_rdBt_faux"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25dp"
+            android:text="@string/config_rep_qst_faux" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/config_bt_qst_valider"
+        style="@style/config_bt_valider"
+        android:layout_marginEnd="0dp"
+        android:text="@string/config_bt_valider_delais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/qst_rdGrp_rep" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

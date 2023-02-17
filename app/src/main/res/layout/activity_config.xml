@@ -67,7 +67,6 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <RadioGroup
         android:id="@+id/config_rdGrp_rep"
         android:layout_width="wrap_content"

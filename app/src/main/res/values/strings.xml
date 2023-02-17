@@ -25,4 +25,8 @@
     <string name="config_qst_perso">Question</string>
     <string name="config_rep_qst_vrai">Vrai</string>
     <string name="config_rep_qst_faux">Faux</string>
+
+
+    <string name="qst_titre">Questions</string>
+    <string name="qst_modif_titre">Modifier la question</string>
 </resources>

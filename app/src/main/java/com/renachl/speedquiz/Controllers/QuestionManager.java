@@ -130,6 +130,30 @@ public class QuestionManager {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
+    /**
+     * Retourne une liste de tous les intitulés de toutes les questions de la liste
+     * @param context Contexte de l'application
+     * @return la liste de l'intitule de question
+     */
+    public static ArrayList<String> getListIntituleQst(Context context) {
+        ArrayList<String> listIntituleQuestion = new ArrayList<>();
+
+        //Création du lien avec la base de données
+        SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
+        SQLiteDatabase db = helper.getReadableDatabase(); // chercher la base de données et la rendre en lecture
+
+        //Récupération des données depuis la base et ajout dans la liste
+        Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "intitule", "reponse"}, null, null, null, null, "idQuiz", null);
+        while (cursor.moveToNext()) {
+            listIntituleQuestion.add(new Question(cursor).getIntitule());
+        }
+
+        //Fermeture de la base
+        cursor.close();
+        db.close();
+
+        return listIntituleQuestion;
+    }
 
     public static void supprimer(Context context) {
         SpeedQuizSqlite helper = new SpeedQuizSqlite(context);

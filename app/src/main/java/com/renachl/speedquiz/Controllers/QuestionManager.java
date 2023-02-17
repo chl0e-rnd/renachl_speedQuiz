@@ -109,7 +109,7 @@ public class QuestionManager {
      * @param context Contexte de l'application
      * @return Nombre de question
      */
-    public static long getNombreQuestion(Context context) {
+    public static long getNumberQuestion(Context context) {
         SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
         SQLiteDatabase db = helper.getReadableDatabase();
         long nombreQuestion = DatabaseUtils.queryNumEntries(db, SpeedQuizSqlite.NOM_TABLE);

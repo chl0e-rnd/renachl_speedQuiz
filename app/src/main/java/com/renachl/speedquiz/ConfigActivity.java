@@ -52,8 +52,8 @@ public class ConfigActivity extends AppCompatActivity {
         changeValueSliderDelais(prefs.getInt("qstDelai", QST_DELAY));
 
         //Change la valeur max du slider en fonction du nombre de question possible
-        SL_NbrQst.setValueTo(QuestionManager.getNombreQuestion(this));
-        SL_NbrQst.setValue(prefs.getInt("nbrQst", (int) QuestionManager.getNombreQuestion(this)));
+        SL_NbrQst.setValueTo(QuestionManager.getNumberQuestion(this));
+        SL_NbrQst.setValue(prefs.getInt("nbrQst", (int) QuestionManager.getNumberQuestion(this)));
 
         //Le bouton pour valider les question est grisé
         BT_ValideNewQst.setEnabled(false);
@@ -104,7 +104,7 @@ public class ConfigActivity extends AppCompatActivity {
         BT_ValideNewQst.setOnClickListener(view -> {
             String reponse = ((RadioButton) findViewById(RDGRP_RepQst.getCheckedRadioButtonId())).getText().toString();
 
-            SL_NbrQst.setValueTo((int) QuestionManager.getNombreQuestion(this));
+            SL_NbrQst.setValueTo((int) QuestionManager.getNumberQuestion(this));
 
             addQstPerso(ED_IntituleQst.getText().toString(), reponse);
 

@@ -10,6 +10,7 @@ public class SpeedQuizSqlite extends SQLiteOpenHelper {
     static int DB_VERSION = 1;
 
     public static final String NOM_TABLE = "quiz";
+    public static final String COL_ID = "idQuiz";
     public static final String COL_QST = "intitule";
     public static final String COL_REP = "reponse";
 
@@ -19,7 +20,7 @@ public class SpeedQuizSqlite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sqlCreateDataTable = "CREATE TABLE " + NOM_TABLE + " (idQuiz INTEGER PRIMARY KEY, " + COL_QST + " TEXT, " + COL_REP + " INTEGER)";
+        String sqlCreateDataTable = "CREATE TABLE " + NOM_TABLE + " ("+ COL_ID + " INTEGER PRIMARY KEY, " + COL_QST + " TEXT, " + COL_REP + " INTEGER)";
         sqLiteDatabase.execSQL(sqlCreateDataTable);
 
         sqLiteDatabase.execSQL("INSERT INTO quiz VALUES (null, \"Odin est petit fou\", 0)");

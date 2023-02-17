@@ -21,25 +21,27 @@ import java.util.ArrayList;
 public class QuestionManager {
 
     private ArrayList<Question> listQuestion = new ArrayList<>();
-    private int nbrQstChoisie = 0;
-    private int nbrQstPosee = 0;
+    private int nbrQstChoose = 0;
+    private int nbrQstAsk = 0;
 
     /**
      * Constructeur de QuestionManager
+     *
      * @param context Context de l'application
      */
     public QuestionManager(Context context) {
         initQuestionList(context);
-        initNombreQuestion(context);
+        initNbrQuestion(context);
     }
 
     /**
      * Donne une question de la liste
+     *
      * @return La question
      */
     public Question nextQuestion() {
         Question currentQuestion = listQuestion.get(getRandomNumber(0, listQuestion.size() - 1));
-        nbrQstPosee++;
+        nbrQstAsk++;
         listQuestion.remove(currentQuestion);
         return currentQuestion;
     }
@@ -49,22 +51,20 @@ public class QuestionManager {
      * @return True si la question n'est pas la dernière, false sinon
      */
     public boolean hasNextQuestion() {
-        return nbrQstPosee < nbrQstChoisie;
+        return nbrQstAsk < nbrQstChoose;
     }
 
     /**
      * Initialose le nombre de question choisie
-     *
      * @param context Contexte de l'application
      */
-    private void initNombreQuestion(Context context) {
+    private void initNbrQuestion(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
-        nbrQstChoisie = prefs.getInt("nbrQst", ConfigActivity.QST_DELAI);
+        nbrQstChoose = prefs.getInt("nbrQst", ConfigActivity.QST_DELAY);
     }
 
     /**
-     * Charge une sllite de question depuis la DB
-     *
+     * Charge une liste de question depuis la DB
      * @param context Le contexte de l'application pour passer la query
      */
     private void initQuestionList(Context context) {
@@ -83,7 +83,6 @@ public class QuestionManager {
 
     /**
      * Ajoute une nouvelle question à la base de données
-     *
      * @param context  Context de l'appplication
      * @param intitule Intitule de la question à ajouter
      * @param reponse  Réponse de la question à ajouter
@@ -109,6 +108,7 @@ public class QuestionManager {
 
     /**
      * Retourne le nombre de questions qui se trouve dans la table
+     *
      * @param context Contexte de l'application
      * @return Nombre de question
      */
@@ -132,6 +132,7 @@ public class QuestionManager {
 
     /**
      * Retourne une liste de tous les intitulés de toutes les questions de la liste
+     *
      * @param context Contexte de l'application
      * @return la liste de l'intitule de question
      */
@@ -154,6 +155,51 @@ public class QuestionManager {
 
         return listIntituleQuestion;
     }
+
+    /**
+     * Modifie une données de la base de données
+     *
+     * @param position Position de la donnée à modifier
+     * @param intitule Nouvel intitulé de la question
+     * @param reponse  Nouvelle réponse de la question
+     */
+    public static void editOneQuestion(Context context, int position, String intitule, int reponse) {
+        SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String sqlCreateDataTable = "UPDATE " + SpeedQuizSqlite.NOM_TABLE +
+                " SET " + SpeedQuizSqlite.COL_QST + " = '" + intitule + "', "
+                + SpeedQuizSqlite.COL_REP + "= " + reponse +
+                " WHERE " + SpeedQuizSqlite.COL_ID + "= " + position + ";";
+        db.execSQL(sqlCreateDataTable);
+    }
+
+    /**
+     * Retourne une question depuis la base de données
+     * @param context Contetxe de l'application
+     * @param position Position
+     * @return question en fonction de la position
+     */
+    public static Question getOneQuestion(Context context, int position) {
+
+        //Création du lien avec la base de données
+        SpeedQuizSqlite helper = new SpeedQuizSqlite(context);
+        SQLiteDatabase db = helper.getReadableDatabase(); // chercher la base de données et la rendre en lecture
+
+        //Récupération des données depuis la base et ajout dans la liste
+        Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "intitule", "reponse"}, null, null, null, null, "idQuiz", null);
+
+        //Obtient la question à l'index voulu
+        cursor.moveToPosition(position);
+        Question question = new Question(cursor);
+
+        //Fermeture de la base
+        cursor.close();
+        db.close();
+
+        return question;
+    }
+
 
     public static void supprimer(Context context) {
         SpeedQuizSqlite helper = new SpeedQuizSqlite(context);

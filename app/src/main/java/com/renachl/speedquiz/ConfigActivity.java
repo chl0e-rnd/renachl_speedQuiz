@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -18,18 +19,18 @@ import com.renachl.speedquiz.Controllers.QuestionManager;
 
 public class ConfigActivity extends AppCompatActivity {
 
-    private Slider SL_Delais;
+    private Slider SL_Delay;
     private Slider SL_NbrQst;
-    private Button BT_TestDelais;
-    private Button BT_ValiderNvQst;
-    private Button BT_GererQst;
+    private Button BT_TestDelay;
+    private Button BT_ValideNewQst;
+    private Button BT_ManageQst;
     private EditText ED_IntituleQst;
     private RadioGroup RDGRP_RepQst;
 
     private Handler handler;
     private Runnable questionRunnable = null;
 
-    public static final int QST_DELAI = 2000;
+    public static final int QST_DELAY = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +38,25 @@ public class ConfigActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_config);
 
-        SL_Delais = findViewById(R.id.config_slide_delais);
+        SL_Delay = findViewById(R.id.config_slide_delais);
         SL_NbrQst = findViewById(R.id.config_slide_nbr_qst);
-        BT_TestDelais = findViewById(R.id.config_bt_tst);
+        BT_TestDelay = findViewById(R.id.config_bt_tst);
 
         ED_IntituleQst = findViewById(R.id.config_ed_initule_qst);
         RDGRP_RepQst = findViewById(R.id.config_rdGrp_rep);
-        BT_ValiderNvQst = findViewById(R.id.config_bt_qst_valider);
+        BT_ValideNewQst = findViewById(R.id.config_bt_qst_valider);
 
-        BT_GererQst = findViewById(R.id.config_bt_li_qst);
+        BT_ManageQst = findViewById(R.id.config_bt_li_qst);
         //Change la valeur du slider pour la mettre à celle actuelle
         SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
-        changeValueSliderDelais(prefs.getInt("qstDelai", QST_DELAI));
+        changeValueSliderDelais(prefs.getInt("qstDelai", QST_DELAY));
 
         //Change la valeur max du slider en fonction du nombre de question possible
         SL_NbrQst.setValueTo(QuestionManager.getNombreQuestion(this));
         SL_NbrQst.setValue(prefs.getInt("nbrQst", (int) QuestionManager.getNombreQuestion(this)));
 
         //Le bouton pour valider les question est grisé
-        BT_ValiderNvQst.setEnabled(false);
+        BT_ValideNewQst.setEnabled(false);
     }
 
 
@@ -67,10 +68,10 @@ public class ConfigActivity extends AppCompatActivity {
         startBtDelaisTest();
 
         //Change la valeur du temps dans les config de l'application au mouvement du slider
-        SL_Delais.addOnChangeListener((slider, value, fromUser) -> {
+        SL_Delay.addOnChangeListener((slider, value, fromUser) -> {
             SharedPreferences prefs = getSharedPreferences("com.renachl.speedquiz", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt("qstDelai", (int) (SL_Delais.getValue() * 1000.0));
+            editor.putInt("qstDelai", (int) (SL_Delay.getValue() * 1000.0));
             editor.apply();
         });
 
@@ -90,7 +91,7 @@ public class ConfigActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                BT_ValiderNvQst.setEnabled(!ED_IntituleQst.getText().toString().equals(""));
+                BT_ValideNewQst.setEnabled(!ED_IntituleQst.getText().toString().equals(""));
             }
 
             @Override
@@ -100,7 +101,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         //Ajoute la nouvelle question à la base de données, vide le champs désactive le bt
-        BT_ValiderNvQst.setOnClickListener(view -> {
+        BT_ValideNewQst.setOnClickListener(view -> {
             String reponse = ((RadioButton) findViewById(RDGRP_RepQst.getCheckedRadioButtonId())).getText().toString();
 
             SL_NbrQst.setValueTo((int) QuestionManager.getNombreQuestion(this));
@@ -112,7 +113,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         //Ouvre l'activity pour afficher la liste de question
-        BT_GererQst.setOnClickListener(view -> {
+        BT_ManageQst.setOnClickListener(view -> {
             Intent questionActivity = new Intent(ConfigActivity.this, QuestionActivity.class);
             startActivity(questionActivity);
         });
@@ -133,7 +134,7 @@ public class ConfigActivity extends AppCompatActivity {
      */
     private void changeValueSliderDelais(int milliSeconde) {
         float valueDelais = (float) (milliSeconde / 1000.0);
-        SL_Delais.setValue(valueDelais);
+        SL_Delay.setValue(valueDelais);
     }
 
     /**
@@ -144,13 +145,13 @@ public class ConfigActivity extends AppCompatActivity {
 
         handler = new Handler();
         questionRunnable = new Runnable() {
-            int isVisible = 0;
+            int isVisible =  View.VISIBLE;
 
             @Override
             public void run() {
-                BT_TestDelais.setVisibility(isVisible);
-                isVisible = isVisible == 4 ? 0 : 4;
-                handler.postDelayed(this, prefs.getInt("qstDelai", QST_DELAI));
+                BT_TestDelay.setVisibility(isVisible);
+                isVisible = isVisible == View.INVISIBLE ? View.VISIBLE : View.INVISIBLE;
+                handler.postDelayed(this, prefs.getInt("qstDelai", QST_DELAY));
             }
         };
         handler.postDelayed(questionRunnable, 1000);

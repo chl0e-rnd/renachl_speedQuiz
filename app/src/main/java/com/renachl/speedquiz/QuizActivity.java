@@ -3,7 +3,6 @@ package com.renachl.speedquiz;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.renachl.speedquiz.Controllers.QuestionManager;
 import com.renachl.speedquiz.Models.Question;
-import com.renachl.speedquiz.Models.SpeedQuizSqlite;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -24,23 +22,23 @@ public class QuizActivity extends AppCompatActivity {
     private QuestionManager questionManager;
 
     // Création des variables de composants
-    private TextView TXT_NomJoueur1;
-    private TextView TXT_NomJoueur2;
-    private TextView TXT_QuestionJ1;
-    private TextView TXT_QuestionJ2;
-    private TextView TXT_ScoreJ1;
-    private TextView TXT_ScoreJ2;
-    private Button BT_J1;
-    private Button BT_J2;
-    private Button BT_Rejouer;
+    private TextView TXT_NamePlayer1;
+    private TextView TXT_NamePlayer2;
+    private TextView TXT_QuestionP1;
+    private TextView TXT_QuestionP2;
+    private TextView TXT_ScoreP1;
+    private TextView TXT_ScoreP2;
+    private Button BT_P1;
+    private Button BT_P2;
+    private Button BT_Replay;
     private Button BT_Menu;
     private ConstraintLayout CT_LAY_Bt;
 
     //Variable
-    private int scoreJoueur1 = 0;
-    private int scoreJoueur2 = 0;
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
     private boolean reponseQuestion = false;
-    private int nombreLancement = 0;
+    private int numberLaunch = 0;
 
     //Variable de configuration
     private final String MESSAGE_VICTOIRE = "VICTOIREEEE";
@@ -55,15 +53,15 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         //Ajout des composants
-        TXT_NomJoueur1 = findViewById(R.id.quiz_txt_nom_j1);
-        TXT_NomJoueur2 = findViewById(R.id.quiz_txt_nom_j2);
-        TXT_QuestionJ1 = findViewById(R.id.quiz_txt_qst_j1);
-        TXT_QuestionJ2 = findViewById(R.id.quiz_txt_qst_j2);
-        TXT_ScoreJ1 = findViewById(R.id.quiz_score_j1);
-        TXT_ScoreJ2 = findViewById(R.id.quiz_score_j2);
-        BT_J1 = findViewById(R.id.quiz_bt_j1);
-        BT_J2 = findViewById(R.id.quiz_bt_j2);
-        BT_Rejouer = findViewById(R.id.quiz_bt_rejouer);
+        TXT_NamePlayer1 = findViewById(R.id.quiz_txt_nom_j1);
+        TXT_NamePlayer2 = findViewById(R.id.quiz_txt_nom_j2);
+        TXT_QuestionP1 = findViewById(R.id.quiz_txt_qst_j1);
+        TXT_QuestionP2 = findViewById(R.id.quiz_txt_qst_j2);
+        TXT_ScoreP1 = findViewById(R.id.quiz_score_j1);
+        TXT_ScoreP2 = findViewById(R.id.quiz_score_j2);
+        BT_P1 = findViewById(R.id.quiz_bt_j1);
+        BT_P2 = findViewById(R.id.quiz_bt_j2);
+        BT_Replay = findViewById(R.id.quiz_bt_rejouer);
         BT_Menu = findViewById(R.id.quiz_bt_menu);
         CT_LAY_Bt = findViewById(R.id.quiz_layout_bt);
 
@@ -72,11 +70,10 @@ public class QuizActivity extends AppCompatActivity {
 
         //Rempli les champs de nom de joueurs
         Intent startActivity = getIntent();
-        TXT_NomJoueur1.setText(startActivity.getStringExtra("nomJoueur1"));
-        TXT_NomJoueur2.setText(startActivity.getStringExtra("nomJoueur2"));
+        TXT_NamePlayer1.setText(startActivity.getStringExtra("namePlayer1"));
+        TXT_NamePlayer2.setText(startActivity.getStringExtra("namePlayer2"));
 
         questionManager = new QuestionManager(this);
-
     }
 
     @Override
@@ -87,31 +84,30 @@ public class QuizActivity extends AppCompatActivity {
         enabledButton(false);
 
         // Ne lance le minuteur seulement si c'est la premiere fois
-        if (nombreLancement == 0) {
+        if (numberLaunch == 0) {
             startCountDownTimer();
-            nombreLancement++;
+            numberLaunch++;
         }
 
-        BT_J1.setOnClickListener(view -> {
+        BT_P1.setOnClickListener(view -> {
             //Active les boutons pour le jeu
             enabledButton(false);
 
             //Change le score du joueur
-            scoreJoueur1 += reponseQuestion ? 1 : -1;
-            TXT_ScoreJ1.setText(scoreJoueur1);
-
+            scorePlayer1 += reponseQuestion ? 1 : -1;
+            TXT_ScoreP1.setText(scorePlayer1);
         });
 
-        BT_J2.setOnClickListener(view -> {
+        BT_P2.setOnClickListener(view -> {
             //Active les boutons pour le jeu
             enabledButton(false);
 
             //Change le score du joueur
-            scoreJoueur2 += reponseQuestion ? 1 : -1;
-            TXT_ScoreJ2.setText(scoreJoueur2);
+            scorePlayer2 += reponseQuestion ? 1 : -1;
+            TXT_ScoreP2.setText(scorePlayer2);
         });
 
-        BT_Rejouer.setOnClickListener(view -> {
+        BT_Replay.setOnClickListener(view -> {
             // Reset et relance le jeu
             resetScreenData();
             startCountDownTimer();
@@ -128,10 +124,10 @@ public class QuizActivity extends AppCompatActivity {
      */
     public void resetScreenData() {
         //Reset les scores des joueurs
-        scoreJoueur1 = 0;
-        scoreJoueur2 = 0;
-        TXT_ScoreJ1.setText("0");
-        TXT_ScoreJ2.setText("0");
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
+        TXT_ScoreP1.setText("0");
+        TXT_ScoreP2.setText("0");
 
         //Nouvel instance de QuestionManager
         questionManager = new QuestionManager(this);
@@ -148,8 +144,8 @@ public class QuizActivity extends AppCompatActivity {
      * @param etat Etat à donner aux boutons
      */
     public void enabledButton(boolean etat) {
-        BT_J1.setEnabled(etat);
-        BT_J2.setEnabled(etat);
+        BT_P1.setEnabled(etat);
+        BT_P2.setEnabled(etat);
     }
 
     /**
@@ -171,15 +167,16 @@ public class QuizActivity extends AppCompatActivity {
                     //Désactiver les boutons
                     enabledButton(false);
 
-                    if (scoreJoueur2 == scoreJoueur1) {
-                        TXT_QuestionJ1.setText(MESSAGE_EGALITE);
-                        TXT_QuestionJ2.setText(MESSAGE_EGALITE);
-                    } else if (scoreJoueur1 > scoreJoueur2) {
-                        TXT_QuestionJ1.setText(MESSAGE_VICTOIRE);
-                        TXT_QuestionJ2.setText(MESSAGE_DEFAITE);
+                    //Affiche les messages de fin
+                    if (scorePlayer2 == scorePlayer1) {
+                        TXT_QuestionP1.setText(MESSAGE_EGALITE);
+                        TXT_QuestionP2.setText(MESSAGE_EGALITE);
+                    } else if (scorePlayer1 > scorePlayer2) {
+                        TXT_QuestionP1.setText(MESSAGE_VICTOIRE);
+                        TXT_QuestionP2.setText(MESSAGE_DEFAITE);
                     } else {
-                        TXT_QuestionJ1.setText(MESSAGE_DEFAITE);
-                        TXT_QuestionJ2.setText(MESSAGE_VICTOIRE);
+                        TXT_QuestionP1.setText(MESSAGE_DEFAITE);
+                        TXT_QuestionP2.setText(MESSAGE_VICTOIRE);
                     }
 
                 } else {
@@ -187,13 +184,12 @@ public class QuizActivity extends AppCompatActivity {
                     enabledButton(true);
 
                     //Récupère la question avec son intitulé et sa réponse
-                    Question questionEnCours = questionManager.nextQuestion();
-                    reponseQuestion = questionEnCours.getReponse();
-                    TXT_QuestionJ1.setText(questionEnCours.getIntitule());
-                    TXT_QuestionJ2.setText(questionEnCours.getIntitule());
+                    Question currentQuestion = questionManager.nextQuestion();
+                    reponseQuestion = currentQuestion.getReponse();
+                    TXT_QuestionP1.setText(currentQuestion.getIntitule());
+                    TXT_QuestionP2.setText(currentQuestion.getIntitule());
 
-
-                    handler.postDelayed(this, prefs.getInt("qstDelai", ConfigActivity.QST_DELAI));
+                    handler.postDelayed(this, prefs.getInt("qstDelai", ConfigActivity.QST_DELAY));
                 }
             }
         };
@@ -208,9 +204,9 @@ public class QuizActivity extends AppCompatActivity {
         new CountDownTimer(6000, 1000) {
             // A chaque itération change le nombre du compte à rebourd
             public void onTick(long mullisUntilFinished) {
-                String temps = Long.toString(mullisUntilFinished / 1000);
-                TXT_QuestionJ1.setText(temps);
-                TXT_QuestionJ2.setText(temps);
+                String time = Long.toString(mullisUntilFinished / 1000);
+                TXT_QuestionP1.setText(time);
+                TXT_QuestionP2.setText(time);
             }
 
             // Quand le compte à rebourd à fini, lancer le jeu avec les questions
